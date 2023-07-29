@@ -1,0 +1,17 @@
+<div class="fixed-bottom" id="selectedHero" *ngIf="hero" [@fadeIn]>
+    <button type="button" class="close abs" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="row">
+        <div class="col-5 text-right">
+            <img class="img-thumbnail" src="{{ hero.avatar }}" alt="{{ hero.name }}">
+        </div>
+        <div class="col-7 text-left">
+            <h2>{{ hero.nickName | uppercase }} | <span class="font-weight-light">{{ hero.name }}</span></h2>
+            <h3> <span id="icon"><fa name="superpowers"></fa> </span> Alter : <span class="font-weight-light">{{ hero.alter }}</span></h3>
+            <button class="btn btn-danger" routerLink="/hero/{{hero.id}}">See more</button>
+        </div>
+    </div>
+
+
+  </div>

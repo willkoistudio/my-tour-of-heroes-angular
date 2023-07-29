@@ -1,0 +1,60 @@
+<div id="dashboard">
+  <div id="header">
+    <h2 class="text-uppercase font-weight-light d-flex flex-column">
+      <div class="m-auto">
+          <div>Dashboard</div>
+          <div *ngIf="heroes$ | async as heroes" class="text-uppercase" id="totalHeroes">total of heroes : {{heroes.length}}</div>
+      </div>
+    </h2>
+  </div>
+  <div id="content">
+    <div>
+      <h4>Welcome to the Boku no Hero Academia Hall of fame !</h4>
+      <p>A wiki dedicated to everything about the manga My Hero Academia created by Kohei Horikoshi.<br>
+        Help us by creating or editing any of our articles! We're currently editing over plenty of articles since March 9, 2018.</p>
+    </div>
+    <div class="zig-zag mt-4">
+      <hr class="zig">
+      <hr class="zag">
+    </div>
+    <h3><fa name="superpowers"></fa> Popular heroes </h3>
+    <hr class="line">
+    <div id="topCharacters">
+      <div class="mx-auto text-center">
+        <div class="row" *ngIf="heroes$ | async as heroes">
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-1 hero" *ngFor="let hero of heroes | shuffle | slice:0:3" (click)="onSelect(hero)">
+            <img class="img-thumbnail pointer" src="{{ hero.avatar }}" alt="{{ hero.name }}" [class.selected]="hero === selectedHero">
+            <p>{{ hero.nickName | uppercase }}</p>
+          </div>
+          <button routerLink="/heroes" class="btn text-uppercase btn-more btn-danger mx-auto"><fa name="plus"></fa> See all heroes</button>
+        </div>
+        <app-hero-detail [@fadeIn] [hero]="selectedHero"></app-hero-detail>
+      </div>
+    </div>
+    <div class="zig-zag">
+      <hr class="zig">
+      <hr class="zag">
+    </div>
+    <h3><fa name="newspaper-o"></fa> Latest articles</h3>
+    <hr class="line">
+    <div id="latestArticles" class="row">
+        <section *ngIf="articles$ | async as articles" class="full d-flex flex-wrap">
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 article" *ngFor="let article of articles | sort | slice:0:3" (click)="onSelect(article)">
+              <div class="card">
+                <img class="card-img-top" src="{{article.picture}}" alt="{{article.title}}">
+                <div class="card-body">
+                  <h5 class="card-title">{{article.title | excerpt:30}}</h5>
+                  <p class="card-text">{{article.content | excerpt:60 }}</p>
+                  <a routerLink="/article/{{article.id}}" class="btn btn-warning">See more</a>
+                  <div class="d-flex justify-content-between a-infos">
+                    <span><fa name="user" class="icon"></fa> By <span class="text-capitalize">{{article.author}}</span> </span>
+                    <span><fa name="calendar" class="icon"></fa> {{article.dateCreated}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button routerLink="/blog" class="btn text-uppercase btn-danger btn-more mx-auto"><fa name="plus"></fa> more articles</button>
+          </section>
+      </div>
+  </div>
+</div>

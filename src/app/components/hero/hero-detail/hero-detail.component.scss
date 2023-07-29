@@ -1,0 +1,20 @@
+#selectedHero {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    .close {
+        right: 20px;
+        z-index: 5;
+    }
+    h3 {
+        font-family: 'Segoe UI', sans-serif;
+        #icon {
+            color: #dc3545;
+        }
+    }
+    .form-inline {
+        width: 280px;
+        label {
+            margin-right: 15px;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+.container {
+    margin-bottom: 50px;
+    min-height: calc(100vh - 140px);
+    #logo {
+        margin-top: 90px;
+        max-width: 400px;
+    }
+    @media only screen and (max-device-width: 767px) {
+        #logo {
+            max-width: 60%;
+        }
+    }
+}
+

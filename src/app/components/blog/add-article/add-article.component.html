@@ -1,0 +1,78 @@
+<section id="content">
+    <div class="mx-auto">
+      <button class="btn btn-secondary" (click)="goBack()"><fa name="undo"></fa> Back </button>
+      <div class="row">
+        <div class="col-12">
+          <h2 class="text-uppercase text-center">add an article</h2>
+          <form class="needs-validation row" [formGroup]="articleForm" novalidate>
+            <div class="form-group col-12">
+              <label for="name">Title</label>
+              <input
+              id="title"
+              type="text"
+              [ngClass]="{'is-invalid' : articleForm.get('title').invalid && (articleForm.get('title').dirty || articleForm.get('title').touched)}"
+              [(ngModel)]="article.title"
+              formControlName="title"
+              maxlength="200"
+              class="form-control"
+              placeholder="Enter a title"
+              required>
+              <div errorMsgForm="title">
+                  <small class="label-invalid" *errorTypeForm="'required'">Please provide a title to create an article.</small>
+                  <small class="label-invalid" *errorTypeForm="'pattern'">The field title is invalid. </small>
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="picture">Picture</label>
+              <div class="custom-file col">
+                <input
+                type="file"
+                acccept=".png"
+                (change)="addFile($event)"
+                formControlName="picture"
+                [ngClass]="{'is-invalid' : articleForm.get('picture').invalid && (articleForm.get('picture').dirty || articleForm.get('picture').touched)}"
+                class="custom-file-input pointer"
+                id="picture"
+                required>
+                <label class="custom-file-label" for="customFile">{{txtFile}}</label>
+              </div>
+            </div>
+            <div class="col-12" *ngIf="preview">
+              <img src="{{preview}}">
+            </div>
+            <div class="col-12" *ngIf="errorsFile">
+              <small *ngFor="let error of errorsFile" class="label-invalid">{{error}}</small>
+          </div>
+            <div class="form-group mt-4 col-12" >
+              <label for="name">Text article</label>
+              <textarea
+              [(ngModel)]="article.content"
+              minLength="100"
+              class="form-control"
+              formControlName="content"
+              id="content"
+              rows="10"
+              [ngClass]="{'is-invalid' : articleForm.get('content').invalid && (articleForm.get('content').dirty || articleForm.get('content').touched)}"
+              required>
+            </textarea>
+              <div errorMsgForm="content">
+                <small class="label-invalid" *errorTypeForm="'required'">Please put a message to your article.</small>
+            </div>
+            <div *ngIf="articleForm.get('content').errors && articleForm.get('content').errors['minlength']">
+              <small
+                class="text-right"
+                [ngClass]="{'label-invalid' : articleForm.get('content').errors['minlength'] && (articleForm.get('content').dirty || articleForm.get('content').touched)}">
+                You have to write more than 100 characters : {{ formMsg.errors['minlength'].actualLength }} / {{ formMsg.errors['minlength'].requiredLength }}
+              </small>
+            </div>
+
+            </div>
+        </form>
+        </div>
+      </div>
+      <!-- <p>{{ articleForm.value | json }}</p>
+      <p>{{ articleForm.status | json }}</p> -->
+      <button type="submit"class="btn btn-danger" [disabled]="articleForm.invalid" (click)="addArticle()"><fa name="save"></fa> Add article </button>
+    </div>
+</section>
+<app-messages [@fadeRight]></app-messages>

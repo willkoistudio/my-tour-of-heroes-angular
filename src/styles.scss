@@ -1,0 +1,106 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+@import url('https://fonts.googleapis.com/css?family=Bangers');
+
+body {
+    background: url('./assets/layout/background/Wikia_background.png') fixed center top #f4f4f4;
+    background-size: contain;
+    .abs {
+        position: absolute
+    }
+    .rel {
+        position: relative;
+    }
+    .full {
+        width:100%;
+    }
+    .nrmlFont {
+        font-family: 'Segoe UI', 'Roboto', Arial, sans-serif, ;
+    }
+    .pointer {
+        cursor: pointer;
+    }
+    .mt {
+        &-20 {
+            margin-top: 20px;
+        }
+    }
+
+    .fixed {
+        position: fixed;
+    }
+    h1, h2, h3 {
+        font-family: 'Bangers', 'Roboto', Arial, sans-serif;
+    }
+    .label {
+        width: 100%;
+        margin-top: 0.25rem;
+        font-size: 80%;
+        &-invalid {
+            color: #dc3545;
+        }
+        &-valid {
+            color: #28a745;
+        }
+    }
+    .separator {
+        width: 20%;
+        margin: 0 auto 40px auto;
+        border: none;
+        border-bottom: 1px solid #ffc107;
+    }
+    .btn-delete {
+        border-radius: 50%;
+        color:#fff;
+        background:#444;
+        &:hover {
+            background:#222;
+        }
+    }
+
+    // style, effets
+    hr {
+        &.zig, &.zag {
+            border: none;
+            height: 30px;
+            margin: 0 50px;
+        }
+        &.zig{
+            background: linear-gradient(-135deg, #FFF 20px, rgba(0, 0, 0, 0) 0) 0 5px, linear-gradient(135deg, #FFF 20px, rgba(0, 0, 0, 0) 0) 0 5px;
+            background-color: rgba(0, 0, 0, 0);
+            background-position: center bottom;
+            background-repeat: repeat-x;
+            background-size: 20px 40px;
+            z-index: 3;
+            position: relative;
+        }
+        &.zag {
+            background: linear-gradient(-135deg, #eee 20px, rgba(0, 0, 0, 0) 0) 0 5px, linear-gradient(135deg, #eee 20px, #FFF 0) 0 5px;
+            background-color: rgba(0, 0, 0, 0);
+            background-position: center bottom;
+            background-repeat: repeat-x;
+            background-size: 20px 40px;
+            z-index: 2;
+            margin-top: -28px;
+        }
+        .hide-xs {
+            display: initial;
+        }
+        .show-xs {
+            display: none;
+        }
+    }
+}
+
+@media only screen and (max-device-width: 767px) {
+    .hide-xs {
+        display: none;
+    }
+    .show-xs {
+        display: initial;
+    }
+    .col-mob {
+        display:block !important;
+    }
+}

@@ -1,0 +1,5 @@
+<div [@fadeRight] id="msg" *ngIf="message" class="fixed-top col-4" [ngClass]="{ 'alert': message, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error' }">
+    <fa name="ban" *ngIf="message.type === 'error'"></fa>
+    <fa name="check-circle" *ngIf="message.type === 'success'"></fa>
+    {{message.text}}
+</div>

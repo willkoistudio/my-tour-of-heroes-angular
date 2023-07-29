@@ -1,0 +1,20 @@
+<section id="comWrap" class="text-left mx-auto">
+  <div *ngIf="article">
+    <div *ngFor="let comment of article.comments; let i = index" class="comment mx-auto">
+      <p class="a-infos">By <span class="text-capitalize">{{comment.author}}</span>, on {{comment.dateCreated}}</p>
+      <div class="block-com d-inline-block rel">
+        <span>{{comment.message}}</span>
+        <button *ngIf="isAdmin || storage.name === comment.author" class="btn btn-delete btn-sm abs" (click)="delComment(article, i)"><fa name="times"></fa></button>
+      </div>
+    </div>
+    <p *ngIf="article.comments.length === 0 " class="text-center" >No comments for the moment. Be the fist to comment this article !</p>
+    <div id="add-com">
+      <h3 class="text-center nrmlFont text-normal">Add comment</h3>
+      <hr class="separator">
+      <div class="text-center d-flex flex-column">
+        <textarea class="mx-auto form-control" [(ngModel)]="txtComment" id="addComment" cols="10" rows="3"></textarea>
+        <button [disabled]="!txtComment" (click)="sendCom(article)" class="btn btn-warning text-center mx-auto" id="sendCom" type="button">Send comment</button>
+      </div>
+    </div>
+  </div>
+</section>

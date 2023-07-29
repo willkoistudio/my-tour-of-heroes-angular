@@ -1,0 +1,51 @@
+<header>
+    <nav class="navbar navbar-dark bg-dark fixed col-12">
+        <ul class="nav col-12">
+            <li class="nav-item d-sm-none">
+                <a class="nav-link disabled" (click)="onMobile()"><fa name="bars"></fa></a>
+            </li>
+            <li class="nav-item hide-xs">
+                <a class="nav-link disabled" routerLink="/home"><fa name="home"></fa>Home</a>
+            </li>
+            <li class="nav-item hide-xs">
+                <a class="nav-link" routerLink="/heroes"><fa name="users"></fa> Heroes</a>
+            </li>
+            <li class="nav-item hide-xs">
+                <a class="nav-link disabled" routerLink="/blog"><fa name="newspaper-o"></fa> Blog</a>
+            </li>
+            <li *ngIf="role === 'admin'" class="hide-xs">
+                <a class="nav-link disabled" routerLink="/add-hero"><fa name="user-plus"></fa> Add Hero</a>
+            </li>
+            <li *ngIf="role === 'admin'" class="hide-xs">
+                    <a class="nav-link disabled" routerLink="/add-article"><fa name="plus-square"></fa> Add Article</a>
+                </li>
+            <li class="nav-item ml-auto">
+                <a class="nav-link disabled" [routerLink]="['/login']"><fa name="power-off"></fa> Logout <span>{{ user | uppercase }}</span> </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<nav [@fadeIn] id="menuMob" class="abs" *ngIf="menuMob">
+    <fa name="times" (click)="closeMenu()" class="abs" id="close"></fa>
+    <div class="justify-content-center mmContainer flex-column d-flex">
+        <ul class="text-uppercase m-auto text-center">
+            <li class="nav-item">
+                <a class="nav-link disabled" (click)="goTo('/home')" ><fa name="home"></fa>Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="goTo('/heroes')"><fa name="users"></fa> Heroes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" (click)="goTo('/blog')" ><fa name="newspaper-o"></fa> Blog</a>
+            </li>
+            <li *ngIf="role === 'admin'">
+                <a class="nav-link disabled" (click)="goTo('/add-hero')"><fa name="user-plus"></fa> Add Hero</a>
+            </li>
+            <li *ngIf="role === 'admin'">
+                <a class="nav-link disabled" (click)="goTo('/add-article')"><fa name="plus-square"></fa> Add Article</a>
+            </li>
+        </ul>
+    </div>
+
+</nav>

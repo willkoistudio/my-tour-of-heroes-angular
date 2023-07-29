@@ -1,0 +1,17 @@
+#msg {
+    margin-top:30px;
+    top: 70px;
+    right: 0;
+    left: auto;
+    &.alert {
+        color:#fff;
+        border:none;
+        border-radius: 4px 0px 0px 4px;
+        &-danger {
+            background: #e74c3c;
+        }
+        &-success {
+            background: #2ecc71;
+        }
+    }
+}

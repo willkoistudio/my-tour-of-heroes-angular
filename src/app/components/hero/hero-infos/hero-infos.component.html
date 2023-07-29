@@ -1,0 +1,49 @@
+<section id="content" *ngIf="hero$ | async as hero">
+  <div class="mx-auto text-center">
+    <div class="d-flex">
+      <button class="btn btn-secondary" (click)="goBack()"><fa name="undo"></fa> Back </button>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 hero text-right">
+        <img *ngIf="!edit" class="img-thumbnail d-inline-block" src="{{ hero.avatar }}" alt="{{ hero.name }}">
+        <div *ngIf="edit && isAdmin">
+            <div class="custom-file">
+              <input
+              type="file"
+              acccept=".png"
+              (change)="addFile($event)"
+              class="custom-file-input pointer">
+              <label class="custom-file-label" for="customFile">{{txtFile}}</label>
+              </div>
+              <img id="preview" class="img-thumbnail d-inline-block" src="{{preview}}" height="200">
+          </div>
+        <p>
+          <b>Name :</b>
+          <span *ngIf="!edit">{{ hero.name }}</span>
+          <input *ngIf="isAdmin && edit" type="text" id="name" class="form-control" [(ngModel)]="hero.name">
+        </p>
+        <p>
+          <b>Family :</b>
+          <span *ngIf="!edit">{{hero.family}}</span>
+          <input *ngIf="isAdmin && edit" type="text" id="family"  class="form-control" [(ngModel)]="hero.family">
+        </p>
+        <p><b><fa name="superpowers"></fa> Alter :</b> <span *ngIf="!edit">{{hero.alter}} </span><input *ngIf="isAdmin && edit" type="text" id="alter" class="form-control" [(ngModel)]="hero.alter"></p>
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 text-left">
+        <h2>HERO :
+          <span *ngIf="!edit">{{ hero.nickName | uppercase }}</span>
+          <input *ngIf="isAdmin && edit" id="nickName" type="text" [(ngModel)]="hero.nickName">
+        </h2>
+        <h5>Description</h5>
+        <p><span *ngIf="!edit">{{hero.description}}</span></p>
+        <textarea *ngIf="isAdmin && edit" name="description" id="description" class="form-control" rows="10" [(ngModel)]="hero.description"></textarea>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isAdmin" class="d-flex justify-content-between">
+    <button *ngIf="isAdmin" class="btn btn-danger delete" title="delete hero" (click)="deleteHero(hero)"><fa name="trash"></fa> Delete</button>
+    <button class="btn btn-info" (click)="onEdit(hero)"><fa name="edit"></fa> Edit </button>
+    <button class="btn btn-success" (click)="save(hero)"><fa name="save"></fa> Save </button>
+  </div>
+</section>
+<app-messages [@fadeRight]></app-messages>

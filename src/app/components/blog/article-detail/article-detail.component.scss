@@ -1,0 +1,54 @@
+#content {
+    background: #fff;
+    margin: 40px auto;
+    border-radius: 4px;
+    padding: 30px;
+    .btn {
+        &-secondary {
+            margin-bottom: 20px;
+        }
+        &-success, &-info, &-danger {
+            margin-top: 20px;
+        }
+    }
+    h2 {
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+    .editBtn {
+        margin-left:15px;
+        color:#dc3545;
+    }
+    .a-infos {
+        margin-bottom: 40px;
+        color:#666;
+        span {
+            &:first-child {
+                margin-right:20px;
+            }
+        }
+        .icon {
+            color: #dc3545;
+        }
+        .form-inline {
+            .icon {
+                margin-right: 5px;
+            }
+            &:first-child {
+                margin-right: 15px;
+            }
+        }
+    }
+    #message {
+        margin: 30px auto;
+    }
+    #preview {
+        margin-top:20px;
+    }
+    textarea {
+        margin-top:20px;
+    }
+    #titleCom {
+        margin-top:30px;
+    }
+}

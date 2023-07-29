@@ -1,0 +1,52 @@
+footer {
+    background: #333;
+    color: #fff;
+    main {
+        padding: 20px;
+        .col-mob {
+            a {
+                width:100%;
+                text-align: center;
+                display: block;
+            }
+        }
+        p {
+            margin-bottom: 0;
+            margin-left:20px;
+            color:#ccc;
+            line-height: 50px;
+        }
+        ul {
+            list-style: none;
+            margin: 0;
+            li {
+                a {
+                    font-weight: 300;
+                    color:#fff;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-device-width: 767px) {
+    footer {
+        main {
+            text-align: center;
+            .col-mob {
+                a {
+                    width:100%;
+                    display: block;
+                }
+            }
+            p {
+                margin-left:0;
+            }
+            ul {
+                padding: 0;
+            }
+        }
+    }
+
+
+}

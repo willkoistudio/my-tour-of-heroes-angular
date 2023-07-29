@@ -1,0 +1,49 @@
+<div id="header">
+  <h2 class="uppercase d-flex flex-row">
+    <div class="m-auto rel">
+      <span>blog</span>
+      <br>
+      <span id="subtitle" class="abs">of heroes</span>
+    </div>
+  </h2>
+</div>
+<div class="rel" id="searchContainer">
+  <input
+  type="search"
+  placeholder="Search an article"
+  id="text"
+  class="form-control col-12 font-weight-light form-control-lg"
+  #searchBox
+  id="search-box"
+  (input)="onChange(searchBox.value)"
+  />
+  <fa *ngIf="searchBox.value" name="times" id="i-search" class="abs pointer" (click)="reset(); searchBox.value=''"></fa>
+</div>
+<section id="content">
+<div class="m-auto text-center">
+  <div class="row">
+    <ng-masonry-grid
+    [useImagesLoaded]="true"
+    (onNgMasonryInit)="onNgMasonryInit($event)"
+    *ngIf="articles"
+    class="full d-flex flex-wrap">
+      <ng-masonry-grid-item class="col-lg-4 col-md-4 col-sm-6 col-xs-12 article" *ngFor="let article of _articles() | sort" (click)="onSelect(article)">
+          <div class="card">
+            <img class="card-img-top" src="{{article.picture}}" alt="{{article.title}}">
+            <div class="card-body">
+              <h5 class="card-title">{{article.title | excerpt:30}}</h5>
+              <p class="card-text">{{article.content | excerpt:60 }}</p>
+              <a routerLink="/article/{{article.id}}" class="btn btn-warning">See more</a>
+              <div class="d-flex justify-content-between a-infos">
+                <span><fa name="user" class="icon"></fa> By <span class="text-capitalize">{{article.author}}</span> </span>
+                <span><fa name="calendar" class="icon"></fa> {{article.dateCreated}}</span>
+              </div>
+            </div>
+          </div>
+      </ng-masonry-grid-item>
+    </ng-masonry-grid>
+  </div>
+  <app-messages [@fadeRight]></app-messages>
+</div>
+</section>
+

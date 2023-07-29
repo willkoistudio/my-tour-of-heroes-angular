@@ -1,0 +1,56 @@
+<section id="content" *ngIf="article$ | async as article">
+    <div class="m-auto text-center">
+      <div class="d-flex">
+        <button class="btn btn-secondary" (click)="goBack()"><fa name="undo"></fa> Back </button>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <h2 class="d-flex justify-content-center">
+            <span *ngIf="!edit">{{article.title}} </span>
+            <div *ngIf="isAdmin && edit" class="form-inline">
+              <label class="nrmlFont">Title : </label>
+              <input type="text" class="nrmlFont form-control form-control-lg" [(ngModel)]="article.title">
+            </div>
+          </h2>
+          <div class="d-flex justify-content-center a-infos">
+            <span *ngIf="!edit"><fa name="user" class="icon"></fa> By <span class="text-capitalize">{{article.author}}</span> </span>
+            <div *ngIf="isAdmin && edit && users$ | async as users" class="form-inline">
+              <fa name="user" class="icon"></fa>
+              <select class="form-control text-capitalize" [(ngModel)]="article.author">
+                <option class="text-capitalize" value="{{user.name}}" *ngFor="let user of users" >{{ user.name}}</option>
+              </select>
+            </div>
+            <span *ngIf="!edit"><fa name="calendar" class="icon"></fa> {{article.dateCreated}}</span>
+            <div *ngIf="isAdmin && edit" class="form-inline">
+              <fa name="calendar" class="icon"></fa>
+              <input type="text" pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d" class="form-control" [(ngModel)]="article.dateCreated">
+            </div>
+          </div>
+          <hr class="separator">
+          <img *ngIf="!edit" src="{{article.picture}}" class="img-fluid" alt="{{article.title}}">
+          <div *ngIf="edit && isAdmin">
+            <div class="custom-file">
+              <input
+              type="file"
+              acccept=".png"
+              (change)="addFile($event)"
+              class="custom-file-input pointer">
+              <label class="custom-file-label" for="customFile">{{txtFile}}</label>
+              </div>
+              <img id="preview" src="{{preview}}" height="200">
+          </div>
+          <p *ngIf="!edit" id="message" class="text-left">{{ article.content }}</p>
+          <textarea *ngIf="isAdmin && edit" name="message" class="form-control" rows="5" [(ngModel)]="article.content"></textarea>
+          <div *ngIf="isAdmin" class="d-flex justify-content-between">
+            <button *ngIf="isAdmin" class="btn btn-danger delete" title="delete article" (click)="deleteArticle(article)"><fa name="trash"></fa> Delete</button>
+            <button class="btn btn-info" (click)="onEdit(article)"><fa name="edit"></fa> Edit </button>
+            <button class="btn btn-success" (click)="save(article)"><fa name="save"></fa> Save </button>
+          </div>
+          <h3 id="titleCom" class="nrmlFont text-normal">Comments</h3>
+          <hr class="separator">
+          <app-comment [article]="article"></app-comment>
+        </div>
+      </div>
+    </div>
+  </section>
+  <app-messages [@fadeRight]></app-messages>

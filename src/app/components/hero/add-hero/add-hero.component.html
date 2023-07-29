@@ -1,0 +1,128 @@
+<section id="content">
+    <div class="mx-auto">
+      <button class="btn btn-secondary" (click)="goBack()"><fa name="undo"></fa> Back </button>
+      <div class="row">
+        <div class="col-12">
+          <h2 class="text-uppercase text-center">add a hero</h2>
+          <form class="needs-validation row" [formGroup]="heroForm" novalidate>
+            <div class="form-group col-md-6 col-sm-12">
+              <label for="name">Name</label>
+              <input
+              id="name"
+              type="text"
+              [ngClass]="{'is-invalid' : heroForm.get('name').invalid && (heroForm.get('name').dirty || heroForm.get('name').touched)}"
+              [(ngModel)]="hero.name"
+              formControlName="name"
+              maxlength="30"
+              class="form-control"
+              placeholder="Enter a name"
+              required>
+              <div errorMsgForm="name">
+                  <small class="label-invalid" *errorTypeForm="'required'">Please provide a name to create a hero.</small>
+                  <small class="label-invalid" *errorTypeForm="'pattern'">The field name is invalid. </small>
+              </div>
+            </div>
+            <div class="form-group col-md-6 col-sm-12">
+              <label for="name">Nickname</label>
+              <input
+              id="nickName"
+              type="text"
+              [(ngModel)]="hero.nickName"
+              maxlength="30"
+              formControlName="nickName"
+              [ngClass]="{'is-invalid' : heroForm.get('nickName').invalid && (heroForm.get('nickName').dirty || heroForm.get('nickName').touched)}"
+              class="form-control"
+              placeholder="Enter a nickname"
+              required>
+              <div errorMsgForm="nickName">
+                  <small class="label-invalid" *errorTypeForm="'required'">Please provide a Nickname to create a hero.</small>
+                  <small class="label-invalid" *errorTypeForm="'pattern'">The field nickName is invalid. </small>
+              </div>
+            </div>
+            <div class="form-group col-md-6 col-sm-12">
+              <label for="name">Alter</label>
+              <input
+              id="alter"
+              type="text"
+              [(ngModel)]="hero.alter"
+              maxlength="20"
+              formControlName="alter"
+              [ngClass]="{'is-invalid' : heroForm.get('alter').invalid && (heroForm.get('alter').dirty || heroForm.get('alter').touched)}"
+              class="form-control"
+              placeholder="Enter an alter name"
+              required>
+              <div errorMsgForm="alter">
+                  <small class="label-invalid" *errorTypeForm="'required'">Please provide an alter name to create a hero.</small>
+              </div>
+            </div>
+            <div class="form-group col-md-6 col-sm-12">
+              <label for="name">Family</label>
+              <select
+              id="family"
+              [ngClass]="{'is-invalid' : heroForm.get('family').invalid && (heroForm.get('family').dirty || heroForm.get('family').touched)}"
+              class="form-control"
+              [(ngModel)]="hero.family"
+              formControlName="family"
+              (change)="changeFamily($event)"
+              required>
+                <option value="">Select a family</option>
+                <option *ngFor="let name of families" value="{{name}}">{{name}}</option>
+              </select>
+              <div errorMsgForm="family">
+                  <small class="label-invalid" *errorTypeForm="'required'">Please provide a family to create a hero.</small>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <label for="avatar">Avatar</label>
+              <div class="custom-file col">
+                <input
+                type="file"
+                acccept=".png"
+                (change)="addFile($event)"
+                formControlName="avatar"
+                [ngClass]="{'is-invalid' : heroForm.get('avatar').invalid && (heroForm.get('avatar').dirty || heroForm.get('avatar').touched)}"
+                class="custom-file-input pointer"
+                id="avatar"
+                required>
+                <label class="custom-file-label" for="customFile">{{txtFile}}</label>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12" *ngIf="preview">
+              <img src="{{preview}}">
+            </div>
+            <div class="col-12" *ngIf="errorsFile">
+              <small *ngFor="let error of errorsFile" class="label-invalid">{{error}}</small>
+          </div>
+            <div class="form-group mt-4 col-12" >
+              <label for="name">Description</label>
+              <textarea
+              [(ngModel)]="hero.description"
+              minLength="100"
+              class="form-control"
+              formControlName="description"
+              id="description"
+              rows="10"
+              [ngClass]="{'is-invalid' : heroForm.get('description').invalid && (heroForm.get('description').dirty || heroForm.get('description').touched)}"
+              required>
+            </textarea>
+              <div errorMsgForm="description">
+                <small class="label-invalid" *errorTypeForm="'required'">Please decribe your hero.</small>
+            </div>
+            <div *ngIf="heroForm.get('description').errors && heroForm.get('description').errors['minlength']">
+              <small
+                class="text-right"
+                [ngClass]="{'label-invalid' : heroForm.get('description').errors['minlength'] && (heroForm.get('description').dirty || heroForm.get('description').touched)}">
+                You have to write more than 100 characters : {{ formDesc.errors['minlength'].actualLength }} / {{ formDesc.errors['minlength'].requiredLength }}
+              </small>
+            </div>
+
+            </div>
+        </form>
+        </div>
+      </div>
+      <!-- <p>{{ heroForm.value | json }}</p>
+      <p>{{ heroForm.status | json }}</p> -->
+      <button type="submit"class="btn btn-danger" [disabled]="heroForm.invalid" (click)="addHero()"><fa name="save"></fa> Add hero </button>
+    </div>
+</section>
+<app-messages [@fadeRight]></app-messages>

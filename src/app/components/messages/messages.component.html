@@ -1,0 +1,6 @@
+<div id="messages" class="fixed-top col-3" *ngIf="messageService.messages.length && notification" [@fadeRight]>
+    <button type="button" class="close abs" aria-label="Close" (click)="messageService.clear()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <p class="text-left" *ngFor='let message of messageService.messages'> {{message}} </p>
+</div>

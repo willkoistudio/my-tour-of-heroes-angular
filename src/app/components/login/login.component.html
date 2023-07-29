@@ -1,0 +1,46 @@
+<main class="d-flex">
+  <section class="m-auto">
+    <img id="logo" src="{{logo}}" width="300" alt="My Heroes Academaia" class="mx-auto">
+    <div id="formGroup">
+      <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
+        <label for="name">Username</label>
+        <div class="input-group col-12">
+          <div class="input-group-prepend">
+            <div class="input-group-text"><fa name="user"></fa></div>
+          </div>
+          <input
+          type="text"
+          class="form-control"
+          id="username"
+          placeholder="Username"
+          [ngClass]="{'is-invalid' : loginForm.get('name').invalid && (loginForm.get('name').dirty || loginForm.get('name').touched)}"
+          [(ngModel)]="user.name"
+          formControlName="name">
+        </div>
+        <div errorMsgForm="name">
+          <small class="label-invalid" *errorTypeForm="'required'">Please put a login.</small>
+          <small class="label-invalid" *errorTypeForm="'pattern'">Login is invalid. </small>
+        </div>
+        <label for="password">Password</label>
+        <div class="input-group col-12">
+          <div class="input-group-prepend">
+            <div class="input-group-text"><fa name="lock"></fa></div>
+          </div>
+          <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Password"
+          [ngClass]="{'is-invalid' : loginForm.get('password').invalid && (loginForm.get('password').dirty || loginForm.get('password').touched)}"
+          [(ngModel)]="user.password"
+          formControlName="password">
+        </div>
+        <div errorMsgForm="password">
+          <small class="label-invalid" *errorTypeForm="'required'">Please put a password.</small>
+        </div>
+        <button type="submit" class="btn btn-danger"><fa name="key"></fa>Login</button>
+      </form>
+    </div>
+  </section>
+</main>
+<app-check-login [@fadeRight]></app-check-login>

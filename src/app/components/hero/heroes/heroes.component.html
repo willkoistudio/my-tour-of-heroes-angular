@@ -1,0 +1,31 @@
+<div class="row" id="video">
+    <iframe class="col-12" height="400" src="https://www.youtube.com/embed/nyeNg6VjDqU?rel=0&amp;showinfo=0" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+</div>
+<div class="rel" id="searchContainer">
+  <input
+  type="search"
+  placeholder="Search your favorite hero"
+  id="text"
+  class="form-control col-12 font-weight-light form-control-lg"
+  #searchBox
+  id="search-box"
+  (input)="onChange(searchBox.value)"
+  />
+  <fa *ngIf="searchBox.value" name="times" id="i-search" class="abs pointer" (click)="reset(); searchBox.value=''"></fa>
+</div>
+<section id="content">
+  <div class="mx-auto text-center">
+    <h2 class="text-uppercase">List of Heroes</h2>
+    <div class="row">
+      <div *ngIf="heroes" class="col-12 d-flex flex-wrap">
+        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 hero" *ngFor="let hero of _heroes()" (click)="onSelect(hero)">
+          <img class="img-thumbnail pointer" src="{{ hero.avatar }}" alt="{{ hero.name }}" [class.selected]="hero === selectedHero">
+          <p>{{ hero.nickName | uppercase }}</p>
+        </div>
+      </div>
+    </div>
+    <app-hero-detail [@fadeIn] [hero]="selectedHero"></app-hero-detail>
+    <app-messages [@fadeRight]></app-messages>
+  </div>
+</section>
+
